@@ -7,9 +7,9 @@ This documentation guides you in setting up a cluster with two master nodes, one
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
 |Load Balancer|loadbalancer.example.com|172.16.16.100|Ubuntu 20.04|1G|1|
-|Master|kmaster1.example.com|172.16.16.101|Ubuntu 20.04|2G|2|
-|Master|kmaster2.example.com|172.16.16.102|Ubuntu 20.04|2G|2|
-|Worker|kworker1.example.com|172.16.16.201|Ubuntu 20.04|1G|1|
+|Master|kmaster1.example.com|192.168.56.101|Ubuntu 20.04|2G|2|
+|Master|kmaster2.example.com|192.168.56.102|Ubuntu 20.04|2G|2|
+|Worker|kworker1.example.com|192.168.56.201|Ubuntu 20.04|1G|1|
 
 > * Password for the **root** account on all these virtual machines is **kubeadmin**
 > * Perform all the commands as root user unless otherwise specified
@@ -25,33 +25,6 @@ If you want to try this in a virtualized environment on your workstation
 ```
 vagrant up
 ```
-
-## Set up load balancer node
-##### Install Haproxy
-```
-apt update && apt install -y haproxy
-```
-##### Configure haproxy
-Append the below lines to **/etc/haproxy/haproxy.cfg**
-```
-frontend kubernetes-frontend
-    bind 172.16.16.100:6443
-    mode tcp
-    option tcplog
-    default_backend kubernetes-backend
-
-backend kubernetes-backend
-    mode tcp
-    option tcp-check
-    balance roundrobin
-    server kmaster1 172.16.16.101:6443 check fall 3 rise 2
-    server kmaster2 172.16.16.102:6443 check fall 3 rise 2
-```
-##### Restart haproxy service
-```
-systemctl restart haproxy
-```
-
 ## On all kubernetes nodes (kmaster1, kmaster2, kworker1)
 ##### Disable Firewall
 ```
@@ -93,7 +66,7 @@ apt update && apt install -y kubeadm=1.19.2-00 kubelet=1.19.2-00 kubectl=1.19.2-
 ## On any one of the Kubernetes master node (Eg: kmaster1)
 ##### Initialize Kubernetes Cluster
 ```
-kubeadm init --control-plane-endpoint="172.16.16.100:6443" --upload-certs --apiserver-advertise-address=172.16.16.101 --pod-network-cidr=192.168.0.0/16
+kubeadm init --control-plane-endpoint="192.168.56.100:6443" --upload-certs --apiserver-advertise-address=172.16.16.101 --pod-network-cidr=192.168.0.0/16
 ```
 Copy the commands to join other master nodes and worker nodes.
 ##### Deploy Calico network
@@ -110,7 +83,7 @@ kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectca
 On your host machine
 ```
 mkdir ~/.kube
-scp root@172.16.16.101:/etc/kubernetes/admin.conf ~/.kube/config
+scp root@192.168.56.100:/etc/kubernetes/admin.conf ~/.kube/config
 ```
 Password for root account is kubeadmin (if you used my Vagrant setup)
 
