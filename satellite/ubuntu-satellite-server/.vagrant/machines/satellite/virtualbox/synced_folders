@@ -1,0 +1,1 @@
+{"virtualbox":{"/vagrant":{"type":"virtualbox","guestpath":"/vagrant","hostpath":"/home/ansadmin/DEVOPS/satellite/ubuntu-satellite-server","disabled":false,"__vagrantfile":true}}}

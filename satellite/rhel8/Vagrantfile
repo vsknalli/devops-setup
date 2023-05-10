@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+
+Vagrant.configure(2) do |config|
+
+  # satellite  Node
+  config.vm.define "satellite-rhel8" do |lb|
+    lb.vm.box = "adfitech/rhel8"
+    lb.vm.hostname = "satellite-rhel8.example.com"
+    lb.vm.network "private_network", ip: "192.168.56.101"
+    lb.vm.provider "virtualbox" do |v|
+      v.name = "satellite"
+      v.gui = true
+      v.memory = 4096
+      v.cpus = 2
+    end
+  end
+end

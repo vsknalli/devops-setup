@@ -1,0 +1,25 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.define "Troubleshooting" do |touble|
+    touble.vm.box = "geerlingguy/centos7"
+	touble.vm.network "private_network", ip: "192.168.56.16"
+	touble.vm.provider "virtualbox" do |vb|
+     vb.memory = "1024"
+   end
+  end
+
+  config.vm.define "touble2" do |touble2|
+    touble2.vm.box = "geerlingguy/centos7"
+	touble2.vm.network "private_network", ip: "192.168.56.17"
+  end
+  
+  config.vm.define "touble3" do |touble3|
+    touble3.vm.box = "geerlingguy/centos7"
+	touble3.vm.network "private_network", ip: "192.168.56.18"
+  end
+
+   config.vm.define "touble4" do |touble4|
+    touble4.vm.box = "ubuntu/bionic64"
+        touble4.vm.network "private_network", ip: "192.168.56.19"
+  end
+end
