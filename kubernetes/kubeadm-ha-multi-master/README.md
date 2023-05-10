@@ -6,7 +6,6 @@ This documentation guides you in setting up a cluster with two master nodes, one
 ## Vagrant Environment
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
-|Load Balancer|loadbalancer.example.com|172.16.16.100|Ubuntu 20.04|1G|1|
 |Master|kmaster1.example.com|192.168.56.101|Ubuntu 20.04|2G|2|
 |Master|kmaster2.example.com|192.168.56.102|Ubuntu 20.04|2G|2|
 |Worker|kworker1.example.com|192.168.56.201|Ubuntu 20.04|1G|1|
