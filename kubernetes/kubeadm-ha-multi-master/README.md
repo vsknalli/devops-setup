@@ -7,7 +7,7 @@ This documentation guides you in setting up a cluster with two master nodes, one
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
 |Master|kmaster.example.com|192.168.56.100|Ubuntu 20.04|2G|2|
-|Worker|kworker1.example.com|192.168.56.101|Ubuntu 20.04|2G|1|
+|Worker|kworker1.example.com|192.168.56.101|Ubuntu 20.04|1G|1|
 |Worker|kworker2.example.com|192.168.56.102|Ubuntu 20.04|1G|1|
 |Worker|kworker3.example.com|192.168.56.103|Ubuntu 20.04|1G|1|
 
